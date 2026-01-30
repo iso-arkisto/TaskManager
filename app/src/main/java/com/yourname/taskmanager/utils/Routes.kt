@@ -1,0 +1,10 @@
+package com.yourname.taskmanager.utils
+
+object Routes {
+    const val SHOPPING_LIST = "shopping_list"
+    const val NOTES_LIST = "notes_list"
+    const val ABOUT = "about"
+    const val SETTINGS = "settings"
+    const val ADD_ITEM = "add_item"
+    const val NEW_NOTE = "new_note"
+}
