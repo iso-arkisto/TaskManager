@@ -1,4 +1,4 @@
-package com.yourname.taskmanager.di
+package com.yourname.taskmanager.screen.di
 
 import android.app.Application
 import androidx.room.Room

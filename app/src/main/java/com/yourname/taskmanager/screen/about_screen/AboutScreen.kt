@@ -1,4 +1,4 @@
-package com.yourname.taskmanager.about_screen
+package com.yourname.taskmanager.screen.about_screen
 
 import androidx.compose.runtime.Composable
 
