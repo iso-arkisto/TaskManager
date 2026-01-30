@@ -1,10 +1,11 @@
-package com.yourname.taskmanager.data
+package com.yourname.taskmanager.data.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.yourname.taskmanager.data.entity.NoteItem
 import kotlinx.coroutines.flow.Flow
 
 @Dao

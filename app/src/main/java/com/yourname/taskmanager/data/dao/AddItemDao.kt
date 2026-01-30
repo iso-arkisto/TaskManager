@@ -1,4 +1,4 @@
-package com.yourname.taskmanager.data
+package com.yourname.taskmanager.data.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,6 +6,9 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.yourname.taskmanager.data.entity.AddItem
+import com.yourname.taskmanager.data.entity.ShoppingListItem
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AddItemDao {
@@ -19,7 +22,7 @@ interface AddItemDao {
     suspend fun updateItem(item: AddItem)
 
     @Query("SELECT * FROM add_item WHERE listId = :listId")
-    suspend fun getAllItemsById(listId: Int): List<AddItem>
+    fun getAllItemsById(listId: Int): Flow<List<AddItem>>
 
     @Query("SELECT * FROM add_item WHERE id = :id")
     suspend fun getItemById(id: Int): AddItem

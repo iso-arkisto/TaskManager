@@ -1,4 +1,4 @@
-package com.yourname.taskmanager.data
+package com.yourname.taskmanager.data.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
+import com.yourname.taskmanager.data.entity.ShoppingListItem
 import kotlinx.coroutines.flow.Flow
 
 @Dao
