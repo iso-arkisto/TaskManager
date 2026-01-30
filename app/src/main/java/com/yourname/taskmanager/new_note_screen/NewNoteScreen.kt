@@ -1,4 +1,4 @@
-package com.yourname.taskmanager.notes_screen
+package com.yourname.taskmanager.new_note_screen
 
 import androidx.compose.runtime.Composable
 
