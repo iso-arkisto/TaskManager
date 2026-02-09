@@ -1,4 +1,4 @@
-package com.yourname.taskmanager.main_screen
+package com.yourname.taskmanager.screen.main_screen
 
 import androidx.compose.runtime.Composable
 
