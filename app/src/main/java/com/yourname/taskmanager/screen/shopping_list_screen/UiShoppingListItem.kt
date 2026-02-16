@@ -26,14 +26,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.yourname.taskmanager.R
+import com.yourname.taskmanager.data.entity.ShoppingListItem
 import com.yourname.taskmanager.ui.theme.DarkText
 import com.yourname.taskmanager.ui.theme.LightText
 import com.yourname.taskmanager.ui.theme.Pink40
 import com.yourname.taskmanager.ui.theme.PinkPastel
+import com.yourname.taskmanager.utils.Routes
 
 @Composable
-@Preview(showBackground = true)
-fun UiShoppingListItem() {
+fun UiShoppingListItem(
+    item: ShoppingListItem,
+    onEvent: (ShoppingListEvent) -> Unit
+) {
     ConstraintLayout(
         modifier = Modifier
             .padding(start = 3.dp, top = 18.dp, end = 3.dp)
@@ -49,7 +53,9 @@ fun UiShoppingListItem() {
                     end.linkTo(parent.end)
                 }
                 .clickable {
-
+                    onEvent(ShoppingListEvent.OnItemClick (
+                        Routes.ADD_ITEM+"/${item.id}"
+                    ))
                 } // onEvent
         ) {
             Column(modifier = Modifier
@@ -57,7 +63,7 @@ fun UiShoppingListItem() {
                 .padding(8.dp)
             ) {
                 Text(
-                    text = "List 1",
+                    text = item.name,
                     style = TextStyle(
                         color = DarkText,
                         fontWeight = FontWeight.Bold,
@@ -65,7 +71,7 @@ fun UiShoppingListItem() {
                     )
                 )
                 Text(
-                    text = "02/02/2026 18:51",
+                    text = item.time,
                     style = TextStyle(
                         color = LightText,
                         fontSize = 12.sp
@@ -90,7 +96,9 @@ fun UiShoppingListItem() {
                     bottom.linkTo(card.top)
                     end.linkTo(deleteBtn.start)
                 },
-            onClick = {} // ShoppingList Event
+            onClick = {
+                onEvent(ShoppingListEvent.OnShowEditDialog(item))
+            } // ShoppingList Event
         ) {
             Icon(
                 painter = painterResource(R.drawable.edit),
@@ -112,7 +120,9 @@ fun UiShoppingListItem() {
                     bottom.linkTo(card.top)
                     end.linkTo(card.end)
                 },
-            onClick = {} // ShoppingList Event
+            onClick = {
+                onEvent(ShoppingListEvent.OnShowDeleteDialog(item))
+            } // ShoppingList Event
         ) {
             Icon(
                 painter = painterResource(R.drawable.delete),
@@ -136,7 +146,7 @@ fun UiShoppingListItem() {
                 .padding(end = 5.dp)
         ) {
             Text(
-                text = "1/6",
+                text = "${item.allSelectedItemsCount}/${item.allItemsCount}",
                 color = Color.White,
                 modifier = Modifier
                     .background(Color.Green)

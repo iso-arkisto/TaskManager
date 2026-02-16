@@ -18,7 +18,7 @@ fun NavGraph(navController: NavHostController) {
         startDestination = Routes.SHOPPING_LIST
     ) {
         composable(Routes.SHOPPING_LIST) {
-            ShoppingListScreen()
+            ShoppingListScreen(onNavigate = {})
         }
         composable(Routes.ABOUT) {
             AboutScreen()

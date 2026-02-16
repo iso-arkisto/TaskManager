@@ -20,7 +20,7 @@ class ShoppingListViewModel @Inject constructor(
     private val repository: ShoppingListRepository
 ): ViewModel(), DialogController {
 
-    private val list = repository.getAllItems()
+    val list = repository.getAllItems()
     private val _uiEvent = Channel<UIEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
@@ -51,10 +51,26 @@ class ShoppingListViewModel @Inject constructor(
                     )
                 }
             }
-            is ShoppingListEvent.OnItemClick -> TODO()
+            is ShoppingListEvent.OnItemClick -> {
+                sendUiEvent(UIEvent.Navigate(
+                    route = event.route
+                ))
+            }
 
-            is ShoppingListEvent.OnShowDeleteDialog -> TODO()
-            is ShoppingListEvent.OnShowEditDialog -> TODO()
+            is ShoppingListEvent.OnShowDeleteDialog -> {
+                listItem = event.item
+                openDialog.value = true
+                dialogTitle.value = "Удалить запись?"
+                showEditableText.value = false
+            }
+
+            is ShoppingListEvent.OnShowEditDialog -> {
+                listItem = event.item
+                openDialog.value = true
+                dialogTitle.value = "Название записи:"
+                showEditableText.value = true
+                editableText.value = listItem?.name ?: ""
+            }
         }
     }
     override fun onDialogEvent(event: DialogEvent) {
@@ -64,14 +80,20 @@ class ShoppingListViewModel @Inject constructor(
             }
             is DialogEvent.OnConfirm -> {
                 if(showEditableText.value) {
-                    onDialogEvent()
+                    onEvent(ShoppingListEvent.OnItemSave)
                 }
                 openDialog.value = false
+            }
+            is DialogEvent.OnTextChange -> {
+                editableText.value = event.text
             }
         }
     }
 
-
-
+    private fun sendUiEvent(event: UIEvent.Navigate) {
+        viewModelScope.launch {
+            _uiEvent.send(event)
+        }
+    }
 
 }
