@@ -7,6 +7,10 @@ sealed class UIEvent {
         val route: String
     ): UIEvent()
 
+    data class NavigateMain(
+        val route: String
+    ): UIEvent()
+
     data class ShowSnackBar(
         val text: String
     ): UIEvent()

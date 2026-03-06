@@ -12,13 +12,16 @@ import com.yourname.taskmanager.screen.shopping_list_screen.ShoppingListScreen
 import com.yourname.taskmanager.utils.Routes
 
 @Composable
-fun NavGraph(navController: NavHostController) {
+fun NavGraph(navController: NavHostController, onNavigate: (String) -> Unit) {
     NavHost(
         navController = navController,
         startDestination = Routes.SHOPPING_LIST
     ) {
         composable(Routes.SHOPPING_LIST) {
-            ShoppingListScreen(onNavigate = {})
+            ShoppingListScreen() {
+                route ->
+                onNavigate(route)
+            }
         }
         composable(Routes.ABOUT) {
             AboutScreen()
