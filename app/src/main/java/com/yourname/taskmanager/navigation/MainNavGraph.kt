@@ -24,7 +24,7 @@ fun MainNavGraph() {
             NewNoteScreen()
         }
         composable(Routes.MAIN_SCREEN) {
-            MainScreen()
+            MainScreen(mainNavHostController = navController)
         }
     }
 }

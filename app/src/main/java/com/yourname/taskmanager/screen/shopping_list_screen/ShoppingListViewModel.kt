@@ -81,6 +81,13 @@ class ShoppingListViewModel @Inject constructor(
             is DialogEvent.OnConfirm -> {
                 if(showEditableText.value) {
                     onEvent(ShoppingListEvent.OnItemSave)
+                } else {
+                    viewModelScope.launch {
+                        listItem?.let {
+                            item ->
+                            repository.deleteItem(item)
+                        }
+                    }
                 }
                 openDialog.value = false
             }
