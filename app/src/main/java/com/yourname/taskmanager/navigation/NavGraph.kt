@@ -33,7 +33,7 @@ fun NavGraph(navController: NavHostController, onNavigate: (String) -> Unit) {
             AddItemScreen()
         }
         composable(Routes.NOTES_LIST) {
-            NoteListScreen()
+            NoteListScreen(onNavigate = {})
         }
     }
 }
