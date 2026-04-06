@@ -9,6 +9,7 @@ import com.yourname.taskmanager.data.repository.NoteItemRepository
 import com.yourname.taskmanager.data.repository.NoteItemRepositoryImpl
 import com.yourname.taskmanager.data.repository.ShoppingListRepository
 import com.yourname.taskmanager.data.repository.ShoppingListRepositoryImpl
+import com.yourname.taskmanager.datastore.DatastoreManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,5 +45,11 @@ object AppModule {
     @Singleton
     fun provideAddItemRepository(mainDb: MainDb): AddItemRepository {
         return AddItemRepositoryImpl(mainDb.addItemDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDataStoreManager(app: Application): DatastoreManager {
+        return DatastoreManager(context = app)
     }
 }

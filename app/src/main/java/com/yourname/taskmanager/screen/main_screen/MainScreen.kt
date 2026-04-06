@@ -24,6 +24,7 @@ import androidx.room.util.TableInfo
 import com.yourname.taskmanager.R
 import com.yourname.taskmanager.dialog.MainDialog
 import com.yourname.taskmanager.navigation.NavGraph
+import com.yourname.taskmanager.utils.Routes
 import com.yourname.taskmanager.utils.UIEvent
 
 @Composable
@@ -84,7 +85,7 @@ fun MainScreen(
         if(viewModel.showFloatingButton.value) {
             FloatingActionButton(
                 onClick = {
-                 viewModel.onEvent(MainScreenEvent.OnShowEditDialog)
+                 viewModel.onEvent(MainScreenEvent.OnNewItemClick(currentRoute ?: Routes.SHOPPING_LIST))
                 },
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
