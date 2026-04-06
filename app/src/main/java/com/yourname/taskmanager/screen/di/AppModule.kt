@@ -55,4 +55,10 @@ object AppModule {
     fun provideAddItemRepository(mainDb: MainDb): AddItemRepository {
         return AddItemRepositoryImpl(mainDb.addItemDao)
     }
+
+    @Provides
+    @Singleton
+    fun provideDataStoreManager(app: Application): DatastoreManager {
+        return DatastoreManager(context = app)
+    }
 }
