@@ -1,6 +1,7 @@
 package com.yourname.taskmanager.screen.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.yourname.taskmanager.data.db.MainDb
 import com.yourname.taskmanager.data.repository.AddItemRepository
@@ -9,15 +10,24 @@ import com.yourname.taskmanager.data.repository.NoteItemRepository
 import com.yourname.taskmanager.data.repository.NoteItemRepositoryImpl
 import com.yourname.taskmanager.data.repository.ShoppingListRepository
 import com.yourname.taskmanager.data.repository.ShoppingListRepositoryImpl
+import com.yourname.taskmanager.datastore.DatastoreManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    @Singleton
+    fun provideDataStoreManager(@ApplicationContext context: Context): DatastoreManager {
+        return DatastoreManager(context)
+    }
+
     @Provides
     @Singleton
     fun provideMainDb(context: Application): MainDb {
