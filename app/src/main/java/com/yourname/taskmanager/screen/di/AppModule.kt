@@ -21,13 +21,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
-    @Provides
-    @Singleton
-    fun provideDataStoreManager(@ApplicationContext context: Context): DatastoreManager {
-        return DatastoreManager(context)
-    }
-
     @Provides
     @Singleton
     fun provideMainDb(context: Application): MainDb {

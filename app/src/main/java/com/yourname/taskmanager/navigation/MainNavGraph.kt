@@ -21,7 +21,9 @@ fun MainNavGraph() {
             AddItemScreen()
         }
         composable(Routes.NEW_NOTE) {
-            NewNoteScreen()
+            NewNoteScreen(
+                onPopBackStack = { navController.popBackStack() }
+            )
         }
         composable(Routes.MAIN_SCREEN) {
             MainScreen(mainNavHostController = navController)
