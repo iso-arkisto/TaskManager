@@ -70,7 +70,7 @@ class NewNoteViewModel @Inject constructor(
                         title = title,
                         description = description,
                         time = System.currentTimeMillis().toString(),
-                        id = null
+                        id = if(noteId < 0) null else noteId
                     ))
 
                     sendUiEvent(UIEvent.PopBackStack)
