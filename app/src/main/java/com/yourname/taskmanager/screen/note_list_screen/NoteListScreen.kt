@@ -3,6 +3,7 @@ package com.yourname.taskmanager.screen.note_list_screen
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,6 +26,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
@@ -70,74 +72,70 @@ fun NoteListScreen(
         }
     }
 
-    NoteListContent(
-        searchQuery = viewModel.searchQuery,
-        noteList = viewModel.noteList,
-        onEvent = viewModel::onEvent
-    )
+    Scaffold(
+        scaffoldState = scaffoldState,
+        snackbarHost = {
+            SnackbarHost(
+                hostState = scaffoldState.snackbarHostState
+            ) { data ->
+                Snackbar(
+                    snackbarData = data,
+                    backgroundColor = Purple40,
+                    modifier = Modifier.padding(bottom = 50.dp)
+                )
+            }
+        }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(GrayLightSoft)
+        ) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(5.dp),
+                shape = RoundedCornerShape(15.dp)
 
-//    Scaffold(
-//        scaffoldState = scaffoldState,
-//        snackbarHost = {
-//            SnackbarHost(
-//                hostState = scaffoldState.snackbarHostState
-//            ) { data ->
-//                Snackbar(
-//                    snackbarData = data,
-//                    backgroundColor = Purple40,
-//                    modifier = Modifier.padding(bottom = 50.dp)
-//                )
-//            }
-//        }
-//    ) {
-//        Column(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .background(GrayLightSoft)
-//        ) {
-//            Card(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(5.dp),
-//                shape = RoundedCornerShape(15.dp)
-//
-//            ) {
-//                TextField(
-//                    value = viewModel.searchQuery,
-//                    onValueChange = { viewModel.onEvent(NoteListEvent.OnTextSearchChange(it)) },
-//                    modifier = Modifier.fillMaxWidth(),
-//                    label = { Text("Search...") }
-//                )
-//
-//            }
-//
-//            LazyColumn(
-//                modifier = Modifier.fillMaxSize(),
-//                contentPadding = PaddingValues(bottom = 100.dp)
-//            ) {
-//                items(viewModel.noteList) { note ->
-//                    UiNoteItem(
-//                        item = note,
-//                        event = viewModel::onEvent
-//                    )
-//                }
-//            }
-//
-//            MainDialog(dialogController = viewModel)
-//
-//            if(viewModel.noteList.isEmpty()) {
-//                Text(
-//                    text = "Empty",
-//                    modifier = Modifier
-//                        .wrapContentHeight()
-//                        .fillMaxSize(),
-//                    textAlign = TextAlign.Center,
-//                    fontSize = 25.sp,
-//                    color = Color.LightGray
-//                )
-//            }
-//        }
-//    }
+            ) {
+                TextField(
+                    value = viewModel.searchQuery,
+                    onValueChange = { viewModel.onEvent(NoteListEvent.OnTextSearchChange(it)) },
+                    modifier = Modifier.fillMaxWidth(),
+                    label = { Text("Search...") }
+                )
+
+            }
+
+            if(viewModel.noteList.isNotEmpty()) {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(bottom = 100.dp)
+                ) {
+                    items(viewModel.noteList) { note ->
+                        UiNoteItem(
+                            item = note,
+                            event = viewModel::onEvent
+                        )
+                    }
+                }
+            } else {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "Empty",
+                        textAlign = TextAlign.Center,
+                        fontSize = 25.sp,
+                        color = Color.Gray
+                    )
+                }
+            }
+
+            MainDialog(dialogController = viewModel)
+        }
+    }
 }
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -208,8 +206,6 @@ fun NoteListContent(
                 }
             }
 
-//            MainDialog(dialogController = viewModel)
-
             if(noteList.isEmpty()) {
                 Text(
                     text = "Empty",
@@ -244,7 +240,7 @@ fun PreviewScreen() {
                 NoteItem(
                     id = 23,
                     title = "Tasks",
-                    description = "Lorem ipsum lqdqdjkqldkalkdjkasm",
+                    description = "Lorem ipsum",
                     time = "23.06.2023 12:34"
                 )
             )
