@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
 data class ShoppingListItem(
     @PrimaryKey val id: Int? = null,
     val name: String,
-    val time: String,
     val allItemsCount: Int,
     val allSelectedItemsCount: Int,
+    val createdAt: Long,
+    val updatedAt: Long = System.currentTimeMillis()
 )

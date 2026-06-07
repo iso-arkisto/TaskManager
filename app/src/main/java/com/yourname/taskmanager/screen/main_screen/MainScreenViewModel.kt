@@ -46,9 +46,9 @@ class MainScreenViewModel @Inject constructor(
                     repository.insertItem(ShoppingListItem(
                         id = null,
                         name = editableText.value,
-                        time = System.currentTimeMillis().toString(),
                         allItemsCount = 0,
-                        allSelectedItemsCount = 0
+                        allSelectedItemsCount = 0,
+                        createdAt = System.currentTimeMillis()
                     ))
                 }
             }

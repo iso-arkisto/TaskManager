@@ -23,6 +23,7 @@ import com.yourname.taskmanager.R
 import com.yourname.taskmanager.data.entity.NoteItem
 import com.yourname.taskmanager.ui.theme.LightText
 import com.yourname.taskmanager.utils.Routes
+import com.yourname.taskmanager.utils.toDateTimeString
 
 @Composable
 fun UiNoteItem(
@@ -54,7 +55,7 @@ fun UiNoteItem(
                     fontSize = 16.sp
                 )
                 Text(
-                    text = item.time,
+                    text = item.updatedAt.toDateTimeString(),
                     modifier = Modifier
                         .padding(top = 10.dp, end = 10.dp),
                     fontSize = 12.sp
@@ -99,7 +100,7 @@ fun PrevNoteItem() {
         title = "TITLE",
         description = "DESCRIPTIONWDHGWDGHAJDGQGEWEDYWEFUGDFQGDSHAKJDAGDEWGDWDHDJHAJHD",
         id = 13278378,
-        time = "23.08.24 12:38"
+        createdAt = System.currentTimeMillis()
     )
     UiNoteItem(
         item = note,

@@ -28,6 +28,7 @@ class ShoppingListViewModel @Inject constructor(
 
     override var dialogTitle = mutableStateOf("List name")
         private set
+
     override var editableText = mutableStateOf("")
         private set
     override var openDialog = mutableStateOf(false)
@@ -44,9 +45,9 @@ class ShoppingListViewModel @Inject constructor(
                         ShoppingListItem(
                             id = listItem?.id,
                             name = editableText.value,
-                            time = System.currentTimeMillis().toString(),
                             allItemsCount = listItem?.allItemsCount ?: 0,
-                            allSelectedItemsCount = listItem?.allSelectedItemsCount ?: 0
+                            allSelectedItemsCount = listItem?.allSelectedItemsCount ?: 0,
+                            createdAt = listItem?.createdAt ?: System.currentTimeMillis()
                         )
                     )
                 }
