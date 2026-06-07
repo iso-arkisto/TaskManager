@@ -241,7 +241,7 @@ fun PreviewScreen() {
                     id = 23,
                     title = "Tasks",
                     description = "Lorem ipsum",
-                    time = "23.06.2023 12:34"
+                    createdAt = System.currentTimeMillis()
                 )
             )
         )

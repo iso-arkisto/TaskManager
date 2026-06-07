@@ -31,6 +31,9 @@ class NewNoteViewModel @Inject constructor(
     var description by mutableStateOf("")
         private set
 
+    var createdAt: Long? by mutableStateOf(null)
+        private set
+
     private val _uiEvent = Channel<UIEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
@@ -43,6 +46,7 @@ class NewNoteViewModel @Inject constructor(
                  repository.getNoteItemById(noteId).let { item ->
                     title = item.title
                     description = item.description
+                     createdAt = item.createdAt
                     this@NewNoteViewModel.noteItem = item
                 }
 
@@ -69,8 +73,8 @@ class NewNoteViewModel @Inject constructor(
                     repository.insertItem(NoteItem(
                         title = title,
                         description = description,
-                        time = System.currentTimeMillis().toString(),
-                        id = if(noteId < 0) null else noteId
+                        id = if(noteId < 0) null else noteId,
+                        createdAt = createdAt ?: System.currentTimeMillis()
                     ))
 
                     sendUiEvent(UIEvent.PopBackStack)

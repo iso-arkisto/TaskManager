@@ -32,6 +32,7 @@ import com.yourname.taskmanager.ui.theme.LightText
 import com.yourname.taskmanager.ui.theme.Pink40
 import com.yourname.taskmanager.ui.theme.PinkPastel
 import com.yourname.taskmanager.utils.Routes
+import com.yourname.taskmanager.utils.toDateTimeString
 
 @Composable
 fun UiShoppingListItem(
@@ -71,7 +72,7 @@ fun UiShoppingListItem(
                     )
                 )
                 Text(
-                    text = item.time,
+                    text = item.updatedAt.toDateTimeString(),
                     style = TextStyle(
                         color = LightText,
                         fontSize = 12.sp

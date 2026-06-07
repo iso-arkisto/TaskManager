@@ -14,7 +14,7 @@ import com.yourname.taskmanager.data.entity.ShoppingListItem
         AddItem::class,
         NoteItem::class
     ],
-    version = 1,
+    version = 3,
     exportSchema = true
     )
 abstract class MainDb: RoomDatabase() {
