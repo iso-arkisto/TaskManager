@@ -140,7 +140,8 @@ class AddItemViewModel @Inject constructor(
 
             val updatedItem = shoppingListItem?.copy(
                 allItemsCount = list.size,
-                allSelectedItemsCount = counter
+                allSelectedItemsCount = counter,
+                updatedAt = System.currentTimeMillis()
             )
             updatedItem?.let { shItem ->
                 shoppingListRepository.updateItem(shItem)
