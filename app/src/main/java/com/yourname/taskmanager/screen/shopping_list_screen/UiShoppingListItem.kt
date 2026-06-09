@@ -82,7 +82,7 @@ fun UiShoppingListItem(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(5.dp),
-                    progress = .5f
+                    progress = item.allSelectedItemsCount.toFloat() / item.allItemsCount
                 )
             }
         }
