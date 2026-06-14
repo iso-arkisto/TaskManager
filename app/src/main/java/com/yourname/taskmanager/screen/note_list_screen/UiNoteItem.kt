@@ -41,7 +41,6 @@ fun UiNoteItem(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.White)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth()
@@ -72,7 +71,6 @@ fun UiNoteItem(
                             .padding(top = 10.dp, start = 10.dp),
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis,
-                        color = LightText,
                         fontSize = 12.sp
                     )
                     IconButton(

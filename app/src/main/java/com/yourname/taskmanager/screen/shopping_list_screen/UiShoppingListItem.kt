@@ -13,6 +13,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -66,7 +67,7 @@ fun UiShoppingListItem(
                 Text(
                     text = item.name,
                     style = TextStyle(
-                        color = DarkText,
+                        color = MaterialTheme.colorScheme.onSurface,
                         fontWeight = FontWeight.Bold,
                         fontSize = 16.sp
                     )
@@ -74,7 +75,7 @@ fun UiShoppingListItem(
                 Text(
                     text = item.updatedAt.toDateTimeString(),
                     style = TextStyle(
-                        color = LightText,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         fontSize = 12.sp
                     )
                 )
@@ -82,7 +83,7 @@ fun UiShoppingListItem(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(5.dp),
-                    progress = item.allSelectedItemsCount.toFloat() / item.allItemsCount
+                    progress = if (item.allSelectedItemsCount > 0) item.allSelectedItemsCount.toFloat()/item.allItemsCount else 0f
                 )
             }
         }
