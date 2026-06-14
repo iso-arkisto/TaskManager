@@ -1,6 +1,7 @@
 package com.yourname.taskmanager.screen.new_note_screen
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,7 @@ import androidx.compose.material.SnackbarHost
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -63,12 +65,15 @@ fun NewNoteScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .systemBarsPadding()
+                .background(MaterialTheme.colorScheme.background)
         ) {
             Card(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(5.dp),
-                shape = RoundedCornerShape(14.dp)
+                shape = RoundedCornerShape(14.dp),
+                backgroundColor = MaterialTheme.colorScheme.background,
+                contentColor = MaterialTheme.colorScheme.onSurface
             ) {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Row(modifier = Modifier.fillMaxWidth()) {
@@ -78,7 +83,7 @@ fun NewNoteScreen(
                             onValueChange = { newText ->
                                 viewModel.onEvent(NewNoteEvent.OnTitleChange(newText))
                             },
-                            label = { Text("Title", fontSize = 14.sp) },
+                            label = { Text("Title", fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface) },
                             singleLine = true,
                             textStyle = TextStyle(
                                 fontSize = 16.sp,
@@ -106,7 +111,8 @@ fun NewNoteScreen(
                         label = {
                             Text(
                                 "Description",
-                                fontSize = 14.sp
+                                fontSize = 14.sp,
+                                color = MaterialTheme.colorScheme.onSurface
                             )
                         }
                     )

@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -102,16 +103,9 @@ fun AddItemScreen(
                                 fontSize = 12.sp
                             )
                         },
-                        colors = TextFieldDefaults.colors(
-                            focusedIndicatorColor = BlueLight,
-                            unfocusedIndicatorColor = Color.Transparent,
-                            disabledIndicatorColor = Color.Transparent,
-                            focusedContainerColor = Color.White,
-                            unfocusedContainerColor = Color.White,
-                        ),
                         textStyle = androidx.compose.ui.text.TextStyle(
                             fontSize = 16.sp,
-                            color = DarkText,
+                            color = MaterialTheme.colorScheme.onSurface,
                         ),
                         singleLine = true
                     )

@@ -13,8 +13,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.OutlinedTextField
+import androidx.compose.material3.Card
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarResult
@@ -31,7 +30,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.UiMode
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -42,6 +40,7 @@ import com.yourname.taskmanager.ui.theme.GrayLightSoft
 import com.yourname.taskmanager.ui.theme.Purple40
 import com.yourname.taskmanager.ui.theme.TaskManagerTheme
 import com.yourname.taskmanager.utils.UIEvent
+import androidx.compose.material3.MaterialTheme
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -89,7 +88,7 @@ fun NoteListScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(GrayLightSoft)
+                .background(androidx.compose.material3.MaterialTheme.colorScheme.background)
         ) {
             Card(
                 modifier = Modifier
@@ -102,7 +101,10 @@ fun NoteListScreen(
                     value = viewModel.searchQuery,
                     onValueChange = { viewModel.onEvent(NoteListEvent.OnTextSearchChange(it)) },
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text("Search...") }
+                    label = { Text("Search...", color = MaterialTheme.colorScheme.onSurface) },
+                    colors = TextFieldDefaults.colors(
+                        focusedTextColor = MaterialTheme.colorScheme.onSurface
+                    )
                 )
 
             }
