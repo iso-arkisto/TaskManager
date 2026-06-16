@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -28,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.yourname.taskmanager.R
 import com.yourname.taskmanager.data.entity.ShoppingListItem
+import com.yourname.taskmanager.screen.settings_screen.ColorUtils
 import com.yourname.taskmanager.ui.theme.DarkText
 import com.yourname.taskmanager.ui.theme.LightText
 import com.yourname.taskmanager.ui.theme.Pink40
@@ -40,6 +42,9 @@ fun UiShoppingListItem(
     item: ShoppingListItem,
     onEvent: (ShoppingListEvent) -> Unit
 ) {
+
+    val progress = if (item.allSelectedItemsCount > 0) item.allSelectedItemsCount.toFloat()/item.allItemsCount else 0f
+
     ConstraintLayout(
         modifier = Modifier
             .padding(start = 3.dp, top = 18.dp, end = 3.dp)
@@ -55,9 +60,11 @@ fun UiShoppingListItem(
                     end.linkTo(parent.end)
                 }
                 .clickable {
-                    onEvent(ShoppingListEvent.OnItemClick (
-                        Routes.ADD_ITEM+"/${item.id}"
-                    ))
+                    onEvent(
+                        ShoppingListEvent.OnItemClick(
+                            Routes.ADD_ITEM + "/${item.id}"
+                        )
+                    )
                 } // onEvent
         ) {
             Column(modifier = Modifier
@@ -83,7 +90,12 @@ fun UiShoppingListItem(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(5.dp),
-                    progress = if (item.allSelectedItemsCount > 0) item.allSelectedItemsCount.toFloat()/item.allItemsCount else 0f
+                    progress = { progress },
+                    color = ColorUtils.getProgressColor(progress),
+                    trackColor = Color.LightGray,
+                    strokeCap = StrokeCap.Butt,
+                    gapSize = 0.dp,
+                    drawStopIndicator = {}
                 )
             }
         }

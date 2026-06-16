@@ -7,8 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yourname.taskmanager.data.entity.NoteItem
 import com.yourname.taskmanager.data.repository.NoteItemRepository
+import com.yourname.taskmanager.datastore.DatastoreManager
 import com.yourname.taskmanager.dialog.DialogController
 import com.yourname.taskmanager.dialog.DialogEvent
+import com.yourname.taskmanager.screen.settings_screen.ColorItem
+import com.yourname.taskmanager.screen.settings_screen.ColorUtils
 import com.yourname.taskmanager.utils.UIEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -19,8 +22,12 @@ import javax.inject.Inject
 @HiltViewModel
 class NoteListViewModel @Inject constructor(
     private val repository: NoteItemRepository,
-
+    private val dataStore: DatastoreManager
 ): ViewModel(), DialogController {
+
+    var titleColor = "#FFB388FF"
+        private set
+
     override var dialogTitle = mutableStateOf("Delete this note?")
         private set
 
@@ -44,6 +51,15 @@ class NoteListViewModel @Inject constructor(
     val uiEvent = _uiEvent.receiveAsFlow()
 
     init {
+
+        viewModelScope.launch {
+            dataStore.getStringPreference(DatastoreManager.TITLE_COLOR, "#FFB388FF")
+                .collect { selectedColor ->
+                    titleColor = selectedColor
+                }
+
+        }
+
         updateNoteList()
     }
 
