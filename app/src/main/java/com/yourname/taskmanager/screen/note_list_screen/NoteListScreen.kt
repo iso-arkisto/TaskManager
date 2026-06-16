@@ -117,7 +117,8 @@ fun NoteListScreen(
                     items(viewModel.noteList) { note ->
                         UiNoteItem(
                             item = note,
-                            event = viewModel::onEvent
+                            event = viewModel::onEvent,
+                            titleColor = Color(viewModel.titleColor.replace("#","").toLong(16))
                         )
                     }
                 }
